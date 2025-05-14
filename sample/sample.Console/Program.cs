@@ -91,7 +91,7 @@ public class ConsoleService : IConsoleService
             stopwatch.Stop();
             
             Thread.Sleep(500); // take a break for 500ms
-            _logger.LogInformation("Elapsed Milliseconds: {Elapsed} - Forecast - {Data}", stopwatch.ElapsedTicks/1000, response);
+            _logger.LogInformation("Elapsed Microseconds: {Elapsed} - Forecast - {Data}", stopwatch.ElapsedTicks/1000, response);
         }
     }
 
