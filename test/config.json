@@ -1,0 +1,6 @@
+{
+  "ConnectionString": "Host=jnmpgf001.postgres.database.azure.com;Username=serverAdmin;Password=Test.123!;Database=postgres;Pooling=true;MinPoolSize=0;MaxPoolSize=100;Timeout=15;",
+  "SchemaName": "public",
+  "TableName": "CacheTest",
+  "CreateIfNotExists": "true"
+}
