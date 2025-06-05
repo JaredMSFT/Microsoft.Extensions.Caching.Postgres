@@ -22,7 +22,8 @@ var host = Host.CreateDefaultBuilder(args)
             options.ConnectionString = context.Configuration.GetConnectionString("PostgresCache");
             options.SchemaName = "public";
             options.TableName = "Cache";
-            //options.CreateIfNotExists = true;
+            options.CreateIfNotExists = true;
+            //options.UseWAL = true;
         });
         // Register your services here
         services.AddScoped<IConsoleService, ConsoleService>();
