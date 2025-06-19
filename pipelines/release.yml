@@ -23,7 +23,7 @@ stages:
         inputs: 
           command: build  
           configuration: $(BuildConfiguration)
-          projects: src/CosmosDistributedCache.csproj
+          projects: src/Microsoft.Extensions.Caching.Postgres.csproj
           arguments: --configuration $(BuildConfiguration) -p:Optimize=true 
           versioningScheme: OFF
 
@@ -31,7 +31,7 @@ stages:
         displayName: 'Create NuGet Package'
         inputs:
           command: custom
-          projects: 'src/CosmosDistributedCache.csproj'
+          projects: 'src/Microsoft.Extensions.Caching.Postgres.csproj'
           custom: pack
           arguments: '-v detailed -c $(BuildConfiguration) --no-build --no-restore -o "$(Build.ArtifactStagingDirectory)\bin\AnyCPU\$(BuildConfiguration)\Microsoft.Extensions.Caching.Postgres"'
 
@@ -39,7 +39,7 @@ stages:
         displayName: 'Create NuGet Symbols Package'
         inputs: 
           command: custom
-          projects: 'src/CosmosDistributedCache.csproj'
+          projects: 'src/Microsoft.Extensions.Caching.Postgres.csproj'
           custom: pack
           arguments: '-v detailed -c $(BuildConfiguration) --no-build --include-symbols /p:SymbolPackageFormat=snupkg --no-restore -o "$(Build.ArtifactStagingDirectory)\bin\AnyCPU\$(BuildConfiguration)\Microsoft.Extensions.Caching.Postgres"'
 
@@ -56,7 +56,7 @@ stages:
           Destination: AzureBlob
           storage: azuresdkpartnerdrops
           ContainerName: 'drops'
-          BlobPrefix: 'cosmosdb/csharp/Microsoft.Extensions.Caching.Postgres/$(BlobVersion)'
+          BlobPrefix: 'azure-postgresql/csharp/Microsoft.Extensions.Caching.Postgres/$(BlobVersion)'
 
       - task: PublishBuildArtifacts@1
         displayName: 'Publish Artifacts: Microsoft.Extensions.Caching.Postgres'
