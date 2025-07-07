@@ -60,12 +60,10 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: 'Copy Artifacts to Azure SDK Release blob storage'
-      uses: azure/CLI@v2
-      with:
-        inlineScript: |
-          az storage blob upload-batch \
-            --account-name azuresdkpartnerdrops \
-            --destination drops \
-            --source ${{ env.PACKAGE_OUTPUT_DIRECTORY }} \
-            --destination-path "azure-postgresql/csharp/Microsoft.Extensions.Caching.Postgres/${{ github.event.inputs.version }}" \
-            --overwrite
+      run: |
+        az storage blob upload-batch \
+          --account-name azuresdkpartnerdrops \
+          --destination drops \
+          --source ${{ env.PACKAGE_OUTPUT_DIRECTORY }} \
+          --destination-path "azure-postgresql/csharp/Microsoft.Extensions.Caching.Postgres/${{ github.event.inputs.version }}" \
+          --overwrite
