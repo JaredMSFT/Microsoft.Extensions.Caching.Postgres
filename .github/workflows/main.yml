@@ -66,4 +66,5 @@ jobs:
           --destination drops \
           --source ${{ env.PACKAGE_OUTPUT_DIRECTORY }} \
           --destination-path "azure-postgresql/csharp/Microsoft.Extensions.Caching.Postgres/${{ github.event.inputs.version }}" \
-          --overwrite
+          --overwrite \
+          --auth-mode login
