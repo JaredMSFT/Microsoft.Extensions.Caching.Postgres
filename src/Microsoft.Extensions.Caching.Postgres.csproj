@@ -5,7 +5,7 @@
 		<Description>Distributed cache implementation of Microsoft.Extensions.Caching.Distributed.IDistributedCache using Postgres.</Description>
 		<Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
 		<CurrentDate>$([System.DateTime]::Now.ToString(yyyyMMdd))</CurrentDate>
-		<TargetFrameworks>net10.0;net9.0;net8.0;net6.0;netstandard2.0;net472</TargetFrameworks>
+		<TargetFrameworks>net6.0;net8.0;net9.0;net10.0;netstandard2.0;netstandard2.1;net481</TargetFrameworks>
 		<LangVersion>13.0</LangVersion>
 		<Nullable>enable</Nullable>
 		<NeutralLanguage>en-US</NeutralLanguage>
@@ -80,13 +80,13 @@
 		<PackageReference Include="Npgsql" Version="9.0.3" />
 	</ItemGroup>
 
-	<!-- Npgsql + polyfills: net6.0, netstandard2.0, net472 -->
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0' or '$(TargetFramework)' == 'net472' or '$(TargetFramework)' == 'netstandard2.0'">
+	<!-- Npgsql + polyfills: net6.0, netstandard2.0, net481 -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0' or '$(TargetFramework)' == 'net481' or '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1'">
 		<PackageReference Include="Npgsql" Version="8.0.7" />		
 	</ItemGroup>
 
 	<!-- Suppress TFM support warnings for older frameworks using polyfill packages -->
-	<PropertyGroup Condition="'$(TargetFramework)' == 'net6.0' or '$(TargetFramework)' == 'net472' or '$(TargetFramework)' == 'netstandard2.0'">
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net6.0' or '$(TargetFramework)' == 'net481' or '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1'">
 		<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
 	</PropertyGroup>
 
