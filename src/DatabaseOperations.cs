@@ -22,6 +22,7 @@ internal sealed class DatabaseOperations : IDatabaseOperations, IAsyncDisposable
     private readonly object ddlLock = new object();
 
     private readonly NpgsqlDataSource ds;
+    private readonly bool isExternalDataSource;
 
     private static byte[] CopyArraySegment(ArraySegment<byte> value) {
         if (value.Array is null || value.Count == 0) {
@@ -36,14 +37,15 @@ internal sealed class DatabaseOperations : IDatabaseOperations, IAsyncDisposable
         Buffer.BlockCopy(value.Array, value.Offset, copied, 0, value.Count);
         return copied;
     }
-
-    public DatabaseOperations(NpgsqlDataSource dataSource, string schemaName, string tableName, bool useWAL, bool createIfNotExists, TimeProvider timeProvider) {
+  
+    public DatabaseOperations(NpgsqlDataSource dataSource, string schemaName, string tableName, bool useWAL, bool createIfNotExists, TimeProvider timeProvider, bool isExternalDataSource = false) {
         ds = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
         SchemaName = schemaName;
         TableName = tableName;
         UseWAL = useWAL;
         CreateIfNotExists = createIfNotExists;
         TimeProvider = timeProvider;
+        this.isExternalDataSource = isExternalDataSource;
         SqlQueries = new SqlQueries(schemaName, tableName, useWAL);
     }
 
@@ -415,6 +417,6 @@ internal sealed class DatabaseOperations : IDatabaseOperations, IAsyncDisposable
     }
 
     public ValueTask DisposeAsync() {
-        return ds.DisposeAsync();
+        return isExternalDataSource ? default : ds.DisposeAsync();
     }
 }
